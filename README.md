@@ -1,20 +1,30 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# TechImpact · Casos de éxito
 
-# Run and deploy your AI Studio app
+Biblioteca interactiva de casos de éxito de **QActions** y sus partners (Tricentis, Veracode, hCaptcha,
+Automation Anywhere y Synthesized) para que los clientes busquen resultados por industria, disciplina y partner.
 
-This contains everything you need to run your app locally.
+- 47 casos con cifras textuales de la fuente oficial y enlace a cada una.
+- Búsqueda, filtros por industria, partner y disciplina, guardados, recomendaciones por perfil.
+- Enlaces directos por caso (`#/caso/<id>`) y selecciones compartibles (`#/guardados?ids=a,b`).
+- Impresión / PDF desde el detalle de cada caso.
 
-View your app in AI Studio: https://ai.studio/apps/37f4061d-283f-4586-9ccd-fa648e8d3d23
+## Ejecutar
 
-## Run Locally
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # genera dist/ (sitio estático, se puede publicar en cualquier hosting)
+npm run lint     # chequeo de tipos
+```
 
-**Prerequisites:**  Node.js
+## Cambiar logos
 
+Los logos viven en `public/logos/` y se registran una sola vez en `src/data/vendors.ts`.
+Reemplace el archivo (mismo nombre) y se actualiza en tarjetas, detalle y sección de partners.
+Si el logo es claro (blanco), marque `logoIsLight: true` para mostrarlo sobre placa azul.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Agregar o editar casos
+
+Edite `src/data/cases.ts`. Cada caso exige `heroKpi` (el número grande), `kpis`, `painPoints`, `benefits`
+y `sources` con la URL oficial. Use solo cifras publicadas por la fuente y marque `anonymized: true`
+cuando la fuente no nombra al cliente.
