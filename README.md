@@ -1,30 +1,40 @@
-# TechImpact · Casos de éxito
+# TechImpact · Casos de éxito de QActions
 
-Biblioteca interactiva de casos de éxito de **QActions** y sus partners (Tricentis, Veracode, hCaptcha,
-Automation Anywhere y Synthesized) para que los clientes busquen resultados por industria, disciplina y partner.
+Biblioteca de casos de éxito de **QActions** y sus partners (Tricentis, Veracode, hCaptcha, Automation Anywhere,
+Synthesized), publicada en **https://qactions.com/casos-de-exito**. Next.js (App Router) con páginas pre-renderizadas.
 
-- 47 casos con cifras textuales de la fuente oficial y enlace a cada una.
-- Búsqueda, filtros por industria, partner y disciplina, guardados, recomendaciones por perfil.
-- Enlaces directos por caso (`#/caso/<id>`) y selecciones compartibles (`#/guardados?ids=a,b`).
-- Impresión / PDF desde el detalle de cada caso.
+- 47 casos, cada uno con URL propia: `/casos-de-exito/<industria>/<caso>`; 20 páginas por industria.
+- SEO: title/description/canonical/Open Graph por caso, imagen OG generada, JSON-LD (Organization, Article,
+  BreadcrumbList, CollectionPage), `sitemap.xml`, `noindex` en hosts técnicos y vistas personales.
+- Captación: formulario → Brevo (UTMs, caso visto, consentimiento) + PDF de marca por caso, Calendly embebido con
+  verificación de la reserva y deal en Brevo CRM, WhatsApp con número por país y mensaje con el caso.
+- Medición: GTM/GA4 con Consent Mode v2, eventos de conversión, Vercel Web Analytics opcional.
+- Los enlaces viejos `#/caso/<id>` redirigen a la URL nueva.
 
-## Ejecutar
+## Desarrollo
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
-npm run build    # genera dist/ (sitio estático, se puede publicar en cualquier hosting)
-npm run lint     # chequeo de tipos
+cp .env.example .env.local   # completar lo necesario
+npm run dev                  # http://localhost:3000/casos-de-exito
+npm run build                # genera PDFs + build de producción
+npm run lint                 # chequeo de tipos
 ```
 
-## Cambiar logos
+Puesta en producción paso a paso: [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md).
 
-Los logos viven en `public/logos/` y se registran una sola vez en `src/data/vendors.ts`.
-Reemplace el archivo (mismo nombre) y se actualiza en tarjetas, detalle y sección de partners.
-Si el logo es claro (blanco), marque `logoIsLight: true` para mostrarlo sobre placa azul.
+## Editar casos
 
-## Agregar o editar casos
+`src/data/cases.ts`. Cada caso exige `heroKpi`, `kpis`, `painPoints`, `benefits` y `sources` con la URL oficial
+(los casos propios de QActions van con `sources: []`). Use solo cifras publicadas por la fuente y marque
+`anonymized: true` cuando la fuente no nombra al cliente.
 
-Edite `src/data/cases.ts`. Cada caso exige `heroKpi` (el número grande), `kpis`, `painPoints`, `benefits`
-y `sources` con la URL oficial. Use solo cifras publicadas por la fuente y marque `anonymized: true`
-cuando la fuente no nombra al cliente.
+**Lo que más impacta en posicionamiento:** completar `qactionsTake` (2–4 frases originales: qué significa el caso
+para una empresa de LATAM y qué haría QActions). Sin ese texto, la página compite con el original del fabricante.
+
+Al cambiar contenido, actualizar `CONTENT_REVIEWED_AT` en `src/lib/site.ts`. La URL de un caso deriva de su `id`:
+no cambie un `id` publicado (rompería enlaces indexados).
+
+## Logos
+
+`public/logos/`, registrados en `src/data/vendors.ts`. Si el logo es claro, `logoIsLight: true`.

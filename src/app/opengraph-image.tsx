@@ -1,0 +1,14 @@
+import { CASE_STUDIES } from '@/lib/cases';
+import { brandCard, OG_SIZE } from '@/lib/og';
+
+export const size = OG_SIZE;
+export const contentType = 'image/png';
+export const alt = 'Casos de éxito de QActions';
+
+export default async function Image() {
+  return brandCard({
+    eyebrow: 'Casos de éxito',
+    title: 'QA, testing, ciberseguridad y RPA + IA, medidos en resultados.',
+    footer: `${CASE_STUDIES.length} casos con fuente oficial · qactions.com/casos-de-exito`,
+  });
+}
