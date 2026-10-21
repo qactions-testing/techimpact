@@ -71,6 +71,12 @@ export interface CaseStudy {
   quote?: { text: string; author: string };
   sources: { label: string; url: string }[];
   featured?: boolean;
+  /**
+   * QActions' own reading of the case (2-4 sentences): what it means for a
+   * LATAM company and what QActions would do. Original content: this is what
+   * makes the page worth ranking over the vendor's original.
+   */
+  qactionsTake?: string;
 }
 
 export interface UserProfile {

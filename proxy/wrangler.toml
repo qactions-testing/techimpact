@@ -1,0 +1,7 @@
+name = "qactions-casos-de-exito-proxy"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+routes = [{ pattern = "qactions.com/casos-de-exito*", zone_name = "qactions.com" }]
+
+[vars]
+ORIGIN = "techimpact.vercel.app"

@@ -1,4 +1,13 @@
 node_modules/
 dist/
+.next/
+out/
+.open-next/
+.wrangler/
+next-env.d.ts
+*.tsbuildinfo
 .env*
 !.env.example
+public/pdf/
+.dev.vars
+public/og/

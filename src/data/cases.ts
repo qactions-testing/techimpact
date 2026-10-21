@@ -2,8 +2,9 @@ import { CaseStudy } from '../types';
 
 // Every figure below is quoted from the linked official source. Cases whose
 // client is not named by the vendor are flagged `anonymized`.
-
-const QA_CASES = 'https://qactions.com/casos-de-exito/';
+// QActions' own cases (vendor: 'qactions') have no third-party source: they
+// used to cite the WordPress page this app replaces. The UI labels them as
+// QActions' own and offers the reference on request.
 
 export const CASE_STUDIES: CaseStudy[] = [
   // ───────────────────────────── QActions ─────────────────────────────
@@ -32,7 +33,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Go-Live en fecha y tiempo de migración reducido en dos tercios.',
     ],
     products: ['Tricentis Tosca', 'Tricentis NeoLoad', 'SAP S/4HANA'],
-    sources: [{ label: 'QActions · Casos de éxito', url: QA_CASES }],
+    sources: [],
     featured: true,
   },
   {
@@ -60,7 +61,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Hiperautomatización con RPA + IA que liberó 121K horas.',
     ],
     products: ['Automation Anywhere Process Discovery', 'IA generativa', 'RPA'],
-    sources: [{ label: 'QActions · Casos de éxito', url: QA_CASES }],
+    sources: [],
     featured: true,
   },
   {
@@ -91,7 +92,6 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     products: ['Veracode Risk Manager'],
     sources: [
-      { label: 'QActions · Casos de éxito', url: QA_CASES },
       {
         label: 'Veracode · Case study',
         url: 'https://www.veracode.com/resources/case-studies/veracode-risk-manager-case-study-reduce-vulnerabilities/',
@@ -123,7 +123,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Ciclos de desarrollo ágiles y seguros.',
     ],
     products: ['Synthesized'],
-    sources: [{ label: 'QActions · Casos de éxito', url: QA_CASES }],
+    sources: [],
   },
   {
     id: 'qactions-banco-argentina',
@@ -148,7 +148,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Capacidad técnica que escala según demanda.',
     ],
     products: ['Consultoría QA', 'Testing Factory'],
-    sources: [{ label: 'QActions · Casos de éxito', url: QA_CASES }],
+    sources: [],
   },
   {
     id: 'qactions-aseguradora-core',
@@ -173,7 +173,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Migración del core sin impacto en el usuario final.',
     ],
     products: ['RPA', 'Automatización de pruebas'],
-    sources: [{ label: 'QActions · Casos de éxito', url: QA_CASES }],
+    sources: [],
   },
   {
     id: 'qactions-hipermercados-coe',
@@ -197,7 +197,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Validación estandarizada a escala.',
     ],
     products: ['QA CoE', 'Testing Factory'],
-    sources: [{ label: 'QActions · Casos de éxito', url: QA_CASES }],
+    sources: [],
   },
   {
     id: 'qactions-telco-sap-mm',
@@ -221,7 +221,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Reducción de incidentes del 30%.',
     ],
     products: ['SAP MM', 'Automatización de pruebas', 'Performance testing'],
-    sources: [{ label: 'QActions · Casos de éxito', url: QA_CASES }],
+    sources: [],
   },
 
   // ───────────────────────────── Tricentis ─────────────────────────────

@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 
 const PULSE_COLORS = ['#5ccff5', '#8b5cf6', '#2dd4bf', '#f5f3db'];

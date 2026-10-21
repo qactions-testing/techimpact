@@ -1,0 +1,47 @@
+name: Deploy (Cloudflare Workers)
+
+# Free: GitHub Actions (public repo) + Cloudflare Workers Free plan.
+# Required repository secrets: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID,
+# BREVO_API_KEY. Optional: CALENDLY_TOKEN, HCAPTCHA_SECRET.
+# Optional repository variables: NEXT_PUBLIC_GTM_ID, NEXT_PUBLIC_HCAPTCHA_SITEKEY,
+# PRODUCTION=true (deploy to qactions.com/techimpact once the zone is on Cloudflare).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency: deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+      NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
+      NEXT_PUBLIC_HCAPTCHA_SITEKEY: ${{ vars.NEXT_PUBLIC_HCAPTCHA_SITEKEY }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      ENV_FLAG: ${{ vars.PRODUCTION == 'true' && '--env production' || '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Build (PDFs, OG images, Next.js, OpenNext)
+        run: npx opennextjs-cloudflare build
+      - name: Deploy
+        run: npx opennextjs-cloudflare deploy $ENV_FLAG
+      - name: Sync secrets to the Worker
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          CALENDLY_TOKEN: ${{ secrets.CALENDLY_TOKEN }}
+          HCAPTCHA_SECRET: ${{ secrets.HCAPTCHA_SECRET }}
+        run: |
+          node -e '
+            const out = {};
+            for (const k of ["BREVO_API_KEY", "CALENDLY_TOKEN", "HCAPTCHA_SECRET"]) if (process.env[k]) out[k] = process.env[k];
+            require("fs").writeFileSync("/tmp/secrets.json", JSON.stringify(out));
+          '
+          npx wrangler secret bulk /tmp/secrets.json $ENV_FLAG
+          rm -f /tmp/secrets.json
