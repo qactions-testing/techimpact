@@ -8,10 +8,17 @@ import { CASE_STUDIES, casePath } from '@/lib/cases';
 import { absUrl, ORG_ID } from '@/lib/site';
 
 export const metadata: Metadata = {
-  // Keeps the title the WordPress page already ranks with.
-  title: { absolute: 'Casos de éxito en QA, testing, ciberseguridad y RPA + IA | QActions' },
+  // Distinct from the WordPress /casos-de-exito page (QActions' own cases) so
+  // both URLs do not compete for the same query.
+  title: { absolute: 'TechImpact: biblioteca de casos de testing, ciberseguridad y RPA + IA por industria | QActions' },
+  description:
+    '47 casos de QActions, Tricentis, Veracode, hCaptcha, Automation Anywhere y Synthesized en banca, seguros, telco, retail, energía, salud y sector público. Filtre por industria; cada cifra enlaza su fuente.',
   alternates: { canonical: absUrl('/') },
-  openGraph: { url: absUrl('/'), title: 'Casos de éxito de QActions y sus partners' },
+  openGraph: {
+    url: absUrl('/'),
+    title: 'TechImpact: casos de QActions y sus partners por industria',
+    images: [{ url: absUrl('/og/home.png'), width: 1200, height: 630 }],
+  },
 };
 
 export default function Home() {
@@ -26,7 +33,7 @@ export default function Home() {
     '@type': 'CollectionPage',
     '@id': `${absUrl('/')}#page`,
     url: absUrl('/'),
-    name: 'Casos de éxito en QA, testing, ciberseguridad y RPA + IA',
+    name: 'TechImpact: biblioteca de casos de testing, ciberseguridad y RPA + IA',
     inLanguage: 'es',
     publisher: { '@id': ORG_ID },
     mainEntity: {

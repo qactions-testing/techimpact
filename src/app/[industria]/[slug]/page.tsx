@@ -44,7 +44,13 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title: caseTitleTag(item),
     description: caseDescription(item),
     alternates: { canonical: url },
-    openGraph: { type: 'article', url, title: `${item.client}: ${item.title}`, description: item.summary },
+    openGraph: {
+      type: 'article',
+      url,
+      title: `${item.client}: ${item.title}`,
+      description: item.summary,
+      images: [{ url: absUrl(`/og/${caseSlug(item)}.png`), width: 1200, height: 630, alt: `${item.client}: ${item.heroKpi.value} ${item.heroKpi.label}` }],
+    },
   };
 }
 
@@ -74,7 +80,7 @@ export default async function CasePage({ params }: { params: Promise<Params> }) 
       inLanguage: 'es',
       url,
       mainEntityOfPage: url,
-      image: `${url}/opengraph-image`,
+      image: absUrl(`/og/${caseSlug(item)}.png`),
       dateModified: CONTENT_REVIEWED_AT,
       author: { '@id': ORG_ID },
       publisher: { '@id': ORG_ID },

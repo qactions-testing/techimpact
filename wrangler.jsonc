@@ -1,0 +1,33 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Free Workers plan. Default environment = staging on *.workers.dev (noindex).
+  // `--env production` adds the qactions.com/techimpact route; it needs the
+  // qactions.com zone on Cloudflare (nameservers moved). WordPress keeps
+  // serving everything outside /techimpact.
+  "name": "qactions-techimpact",
+  "main": "worker.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": { "directory": ".open-next/assets", "binding": "ASSETS" },
+  "workers_dev": true,
+  "observability": { "enabled": true },
+  // Not secret. Secrets (BREVO_API_KEY, CALENDLY_TOKEN, HCAPTCHA_SECRET) are set
+  // by the deploy workflow from GitHub secrets, never committed (public repo).
+  "vars": {
+    "BREVO_SENDER_EMAIL": "marketing@qactions.com",
+    "LEAD_NOTIFY_EMAIL": "comercial@qactions.com",
+    "BREVO_LIST_ID": ""
+  },
+  "env": {
+    "production": {
+      "name": "qactions-techimpact",
+      "routes": [{ "pattern": "qactions.com/techimpact*", "zone_name": "qactions.com" }],
+      "workers_dev": false,
+      "vars": {
+        "BREVO_SENDER_EMAIL": "marketing@qactions.com",
+        "LEAD_NOTIFY_EMAIL": "comercial@qactions.com",
+        "BREVO_LIST_ID": ""
+      }
+    }
+  }
+}

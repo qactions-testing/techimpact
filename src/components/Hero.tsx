@@ -32,8 +32,8 @@ export default function Hero({
           <span className="glow-dot h-2 w-2 rounded-full bg-aqua text-aqua" /> Cada cifra enlaza su fuente oficial
         </p>
         <h1 className="mt-5 text-4xl leading-[1.05] font-black tracking-tight sm:text-5xl lg:text-6xl">
-          Casos de éxito en QA, testing, ciberseguridad y RPA + IA,{' '}
-          <span className="text-title">medidos en resultados.</span>
+          Impacto tecnológico real en QA, testing, ciberseguridad y RPA + IA,{' '}
+          <span className="text-title">industria por industria.</span>
         </h1>
         <p className="mt-5 max-w-xl text-lg text-beige/70">
           Lo que lograron bancos, aseguradoras, telcos, retailers, energéticas y organismos públicos con QActions y con

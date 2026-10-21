@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { GoogleTagManager } from '@next/third-parties/google';
-import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import CircuitBackground from '@/components/CircuitBackground';
 import ClientBoot from '@/components/ClientBoot';
@@ -12,12 +11,11 @@ import JsonLd from '@/components/JsonLd';
 import { BASE_PATH, ORG_ID, SITE_ORIGIN, SITE_URL, SOCIAL } from '@/lib/site';
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
-const VERCEL_ANALYTICS = process.env.NEXT_PUBLIC_VERCEL_ANALYTICS === '1';
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${SITE_URL}/`),
   title: {
-    default: 'Casos de éxito en QA, testing, ciberseguridad y RPA + IA | QActions',
+    default: 'TechImpact: resultados de QA, testing, ciberseguridad y RPA + IA | QActions',
     template: '%s | QActions',
   },
   description:
@@ -76,10 +74,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </div>
         <ClientBoot />
         <ConsentBanner />
-        {/* Proxied under qactions.com: the Worker maps /casos-de-exito/_vercel/* to the deployment's /_vercel/*. */}
-        {VERCEL_ANALYTICS && (
-          <Analytics scriptSrc={`${BASE_PATH}/_vercel/insights/script.js`} endpoint={`${BASE_PATH}/_vercel/insights`} />
-        )}
       </body>
     </html>
   );

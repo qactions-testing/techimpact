@@ -17,6 +17,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     kpi: item.heroKpi.value,
     kpiLabel: item.heroKpi.label,
     title: `${item.client}: ${item.title}`,
-    footer: item.vendor === 'qactions' ? 'Caso de QActions · qactions.com/casos-de-exito' : `Caso publicado por ${publisherName(item)} · qactions.com/casos-de-exito`,
+    footer: item.vendor === 'qactions' ? 'Caso de QActions · qactions.com/techimpact' : `Caso publicado por ${publisherName(item)} · qactions.com/techimpact`,
   });
 }

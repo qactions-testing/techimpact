@@ -1,14 +1,15 @@
 # TechImpact · Casos de éxito de QActions
 
 Biblioteca de casos de éxito de **QActions** y sus partners (Tricentis, Veracode, hCaptcha, Automation Anywhere,
-Synthesized), publicada en **https://qactions.com/casos-de-exito**. Next.js (App Router) con páginas pre-renderizadas.
+Synthesized), publicada en **https://qactions.com/techimpact**. Next.js (App Router) con páginas pre-renderizadas,
+servida gratis en Cloudflare Workers (OpenNext) junto a WordPress.
 
-- 47 casos, cada uno con URL propia: `/casos-de-exito/<industria>/<caso>`; 20 páginas por industria.
+- 47 casos, cada uno con URL propia: `/techimpact/<industria>/<caso>`; 20 páginas por industria.
 - SEO: title/description/canonical/Open Graph por caso, imagen OG generada, JSON-LD (Organization, Article,
   BreadcrumbList, CollectionPage), `sitemap.xml`, `noindex` en hosts técnicos y vistas personales.
 - Captación: formulario → Brevo (UTMs, caso visto, consentimiento) + PDF de marca por caso, Calendly embebido con
   verificación de la reserva y deal en Brevo CRM, WhatsApp con número por país y mensaje con el caso.
-- Medición: GTM/GA4 con Consent Mode v2, eventos de conversión, Vercel Web Analytics opcional.
+- Medición: GTM/GA4 con Consent Mode v2 y eventos de conversión.
 - Los enlaces viejos `#/caso/<id>` redirigen a la URL nueva.
 
 ## Desarrollo
@@ -16,8 +17,9 @@ Synthesized), publicada en **https://qactions.com/casos-de-exito**. Next.js (App
 ```bash
 npm install
 cp .env.example .env.local   # completar lo necesario
-npm run dev                  # http://localhost:3000/casos-de-exito
-npm run build                # genera PDFs + build de producción
+npm run dev                  # http://localhost:3000/techimpact
+npm run build                # PDFs + imágenes OG + build de Next
+npm run cf:preview           # build para Workers y prueba local con el runtime real
 npm run lint                 # chequeo de tipos
 ```
 

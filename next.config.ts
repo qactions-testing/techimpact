@@ -1,8 +1,8 @@
 import type { NextConfig } from 'next';
 
-// The app is served under qactions.com/casos-de-exito, so every route, asset
+// The app is served under qactions.com/techimpact, so every route, asset
 // and API lives under this prefix. Change it here and in src/lib/site.ts.
-const BASE_PATH = '/casos-de-exito';
+const BASE_PATH = '/techimpact';
 
 const nextConfig: NextConfig = {
   basePath: BASE_PATH,

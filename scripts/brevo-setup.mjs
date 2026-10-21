@@ -1,6 +1,8 @@
-// One-time Brevo setup: creates the custom contact attributes and the
-// "TechImpact · Leads" list used by /api/lead and /api/demo.
-// Usage: BREVO_API_KEY=xkeysib-... npm run brevo:setup
+// One-time Brevo setup (safe to re-run):
+// - renames the marketing@qactions.com sender from "My Company" to "QActions";
+// - creates the custom contact attributes used by /api/lead and /api/demo;
+// - creates the "TechImpact · Leads" list and prints its id.
+// Usage: BREVO_API_KEY=xkeysib-... npm run brevo:setup   (or the "Brevo setup" GitHub Action)
 const key = process.env.BREVO_API_KEY;
 if (!key) {
   console.error('Set BREVO_API_KEY first.');
@@ -11,6 +13,16 @@ const api = (path, init = {}) =>
     ...init,
     headers: { 'api-key': key, accept: 'application/json', 'content-type': 'application/json' },
   });
+
+const SENDER_EMAIL = process.env.BREVO_SENDER_EMAIL || 'marketing@qactions.com';
+const senders = await (await api('/senders')).json();
+const sender = senders.senders?.find((x) => x.email === SENDER_EMAIL);
+if (!sender) console.log(`Remitente ${SENDER_EMAIL}: no encontrado (revisar en Brevo > Senders).`);
+else if (sender.name === 'QActions') console.log(`Remitente ${SENDER_EMAIL}: ya se llama QActions.`);
+else {
+  const r = await api(`/senders/${sender.id}`, { method: 'PUT', body: JSON.stringify({ name: 'QActions', email: sender.email }) });
+  console.log(`Remitente ${SENDER_EMAIL}: "${sender.name}" → "QActions" ${r.ok ? 'OK' : `ERROR ${r.status} ${await r.text()}`}`);
+}
 
 const TEXT = [
   'LEAD_ORIGEN', 'CASO_VISTO', 'CASO_INDUSTRIA', 'CASO_PARTNER', 'LANDING_URL', 'UTM_SOURCE', 'UTM_MEDIUM',

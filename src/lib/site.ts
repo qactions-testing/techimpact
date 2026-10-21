@@ -1,7 +1,7 @@
 // Single place for public URLs and contact points.
 
 export const SITE_ORIGIN = 'https://qactions.com';
-export const BASE_PATH = '/casos-de-exito';
+export const BASE_PATH = '/techimpact';
 export const SITE_URL = `${SITE_ORIGIN}${BASE_PATH}`;
 export const ORG_ID = `${SITE_ORIGIN}/#organization`;
 

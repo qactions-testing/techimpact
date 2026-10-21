@@ -9,7 +9,7 @@ import {
 } from '@/lib/cases';
 import { absUrl, CONTENT_REVIEWED_AT } from '@/lib/site';
 
-// Published at https://qactions.com/casos-de-exito/sitemap.xml. Reference it
+// Published at https://qactions.com/techimpact/sitemap.xml. Reference it
 // from the WordPress robots.txt (robots.txt only works at the host root).
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date(CONTENT_REVIEWED_AT);

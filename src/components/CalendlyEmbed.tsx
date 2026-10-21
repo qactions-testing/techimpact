@@ -38,7 +38,7 @@ export default function CalendlyEmbed({
         prefill: { name: prefill?.name, email: prefill?.email, customAnswers: { a1: `Caso: ${caseTitle}` } },
         utm: {
           utmSource: a.utm_source ?? 'techimpact',
-          utmMedium: a.utm_medium ?? 'casos-de-exito',
+          utmMedium: a.utm_medium ?? 'techimpact',
           utmCampaign: a.utm_campaign,
           utmContent: caseId,
           utmTerm: a.utm_term,

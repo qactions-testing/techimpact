@@ -16,7 +16,9 @@ import {
 import { absUrl, ORG_ID } from '@/lib/site';
 
 type Params = { industria: string };
-export const dynamicParams = false;
+// Unknown slugs still 404 through load(). (dynamicParams=false on this
+// top-level segment made OpenNext on Workers answer 404 for every hub.)
+export const dynamicParams = true;
 
 export function generateStaticParams(): Params[] {
   return industriesWithCases().map((i) => ({ industria: industrySlug(i) }));
@@ -36,6 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title: `Casos de éxito en ${industry}: testing, ciberseguridad y RPA + IA`,
     description: `${list.length} casos de éxito en ${industry} con ${partners.join(', ')}: resultados medidos y fuente oficial de cada cifra.`.slice(0, 158),
     alternates: { canonical: absUrl(`/${industria}`) },
+    openGraph: { images: [{ url: absUrl('/og/home.png'), width: 1200, height: 630 }] },
     // Hubs with one or two cases are thin: useful to visitors, not to the index.
     robots: list.length < MIN_CASES_TO_INDEX_INDUSTRY ? { index: false, follow: true } : undefined,
   };

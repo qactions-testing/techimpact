@@ -1,8 +1,8 @@
 import 'server-only';
 
-// Best-effort, per-instance rate limit. Serverless instances do not share
-// memory, so add a platform rule too (Vercel Firewall or Cloudflare WAF) for
-// real protection: 10 POST/min per IP on /casos-de-exito/api/*.
+// Best-effort, per-isolate rate limit. Worker isolates do not share memory,
+// so add a Cloudflare WAF rate-limiting rule too (one rule is free):
+// 10 POST/min per IP on /techimpact/api/*.
 const hits = new Map<string, number[]>();
 
 export function rateLimited(key: string, max = 5, windowMs = 10 * 60_000) {
